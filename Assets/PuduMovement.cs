@@ -6,7 +6,12 @@ public class PuduMovement : MonoBehaviour
     public float moveSpeed = 3f;
     public float turnSpeed = 180f;
 
+    [Header("Jump Settings")]
+    public float jumpHeight = 2f;
+    public float gravity = -20f;
+
     private CharacterController controller;
+    private float verticalVelocity;
 
     void Start()
     {
@@ -41,12 +46,24 @@ public class PuduMovement : MonoBehaviour
                 targetRotation,
                 turnSpeed * Time.deltaTime
             );
+        }
 
-            controller.SimpleMove(transform.forward * moveSpeed);
-        }
-        else
+        if (controller.isGrounded)
         {
-            controller.SimpleMove(Vector3.zero);
+            if (verticalVelocity < 0f)
+                verticalVelocity = -2f;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
         }
+
+        verticalVelocity += gravity * Time.deltaTime;
+
+        Vector3 movement = transform.forward * (input.sqrMagnitude > 0.01f ? moveSpeed : 0f);
+        movement.y = verticalVelocity;
+
+        controller.Move(movement * Time.deltaTime);
     }
 }
