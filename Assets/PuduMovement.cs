@@ -27,15 +27,26 @@ public class PuduMovement : MonoBehaviour
 
         if (input.sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(input);
+            Vector3 direction = Camera.main != null
+                ? Camera.main.transform.TransformDirection(input)
+                : input;
+
+            direction.y = 0f;
+            direction.Normalize();
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation,
                 targetRotation,
                 turnSpeed * Time.deltaTime
             );
-        }
 
-        Vector3 movement = transform.forward * input.magnitude;
-        controller.SimpleMove(movement * moveSpeed);
+            controller.SimpleMove(transform.forward * moveSpeed);
+        }
+        else
+        {
+            controller.SimpleMove(Vector3.zero);
+        }
     }
 }
