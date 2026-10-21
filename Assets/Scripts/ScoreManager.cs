@@ -6,9 +6,14 @@ public class ScoreManager : MonoBehaviour
     public int mushrooms = 0;
     public TextMeshProUGUI mushroomText;
 
+    [Header("Eating Sound")]
+    public AudioClip mushroomEatSound;
+    private AudioSource audioSource;
+
     [Header("Level Complete")]
     public int mushroomsRequired = 10;
     public GameObject levelCompletePanel;
+    public GameObject mushroomCounter;
 
     private bool levelComplete = false;
 
@@ -16,9 +21,23 @@ public class ScoreManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.playOnAwake = false;
+
         if (levelCompletePanel != null)
         {
             levelCompletePanel.SetActive(false);
+        }
+
+        if (mushroomCounter != null)
+        {
+            mushroomCounter.SetActive(true);
         }
 
         UpdateText();
@@ -29,6 +48,12 @@ public class ScoreManager : MonoBehaviour
         if (levelComplete) return;
 
         mushrooms++;
+
+        if (mushroomEatSound != null)
+        {
+            audioSource.PlayOneShot(mushroomEatSound);
+        }
+
         UpdateText();
 
         if (mushrooms >= mushroomsRequired)
@@ -57,6 +82,11 @@ public class ScoreManager : MonoBehaviour
     void ShowLevelComplete()
     {
         levelComplete = true;
+
+        if (mushroomCounter != null)
+        {
+            mushroomCounter.SetActive(false);
+        }
 
         if (levelCompletePanel != null)
         {

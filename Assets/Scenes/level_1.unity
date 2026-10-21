@@ -1301,7 +1301,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.9874816, z: 0, w: 0.15773448}
-  m_LocalPosition: {x: 290.45282, y: 134.42, z: 175.85223}
+  m_LocalPosition: {x: 291.69888, y: 137.92, z: 179.65318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3612,8 +3612,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
   mushrooms: 0
   mushroomText: {fileID: 1316796905}
+  mushroomEatSound: {fileID: 8300000, guid: 1f5f6491dff6f4143a762a07bc59c8f9, type: 3}
   mushroomsRequired: 10
   levelCompletePanel: {fileID: 1635235812}
+  mushroomCounter: {fileID: 0}
 --- !u!1001 &1358875565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3960,9 +3962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
   Damping: {x: 0.1, y: 0.5, z: 0.3}
   ShoulderOffset: {x: 0.5, y: 5, z: -10}
-  VerticalArmLength: 0.5
+  VerticalArmLength: 4
   CameraSide: 1
-  CameraDistance: 4
+  CameraDistance: 8
   AvoidObstacles:
     Enabled: 0
     CollisionFilter:
@@ -4024,7 +4026,7 @@ Transform:
   m_GameObject: {fileID: 1502440735}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9874816, z: -0, w: 0.15773448}
-  m_LocalPosition: {x: 290.45282, y: 134.42, z: 175.85223}
+  m_LocalPosition: {x: 291.69888, y: 137.92, z: 179.65318}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5407,6 +5409,10 @@ PrefabInstance:
       propertyPath: destination
       value: 
       objectReference: {fileID: 1579008240}
+    - target: {fileID: 1187347538445445335, guid: 6fad828ac8b284f9783a32e3023151d2, type: 3}
+      propertyPath: swooshSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e03880b07cf2c4a898f2aa04a7f1ac5b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5468,6 +5474,10 @@ PrefabInstance:
       propertyPath: destination
       value: 
       objectReference: {fileID: 193025721}
+    - target: {fileID: 5894818758202828694, guid: a2cebbbf3077c486786224513f8ee292, type: 3}
+      propertyPath: swooshSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e03880b07cf2c4a898f2aa04a7f1ac5b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
