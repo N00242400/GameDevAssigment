@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
+// audio source for the collection sound
     private AudioSource audioSource;
+// stops the mushroom from being collected more than once
     private bool collected = false;
 
     void Start()
@@ -45,7 +47,7 @@ public class Collectible : MonoBehaviour
             {
                 r.enabled = false;
             }
-
+// destroys the mushroom after the sound finishes
             Destroy(gameObject, audioSource.clip.length);
         }
         else
