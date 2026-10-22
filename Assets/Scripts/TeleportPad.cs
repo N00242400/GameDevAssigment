@@ -7,6 +7,7 @@ public class TeleportPad : MonoBehaviour
 
     [Header("Teleport Sound")]
     public AudioClip swooshSound;
+
     [Range(0f, 1f)]
     public float soundVolume = 1f;
 
@@ -29,8 +30,17 @@ public class TeleportPad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Teleport pad touched by: " +
+            other.name + " | Tag: " + other.tag);
+
         if (!other.CompareTag("Player") || isTeleporting)
             return;
+
+        if (destination == null)
+        {
+            Debug.LogError("Teleport destination is not assigned!", this);
+            return;
+        }
 
         StartCoroutine(TeleportPlayer(other));
     }
@@ -42,7 +52,7 @@ public class TeleportPad : MonoBehaviour
         if (swooshSound != null)
         {
             audioSource.PlayOneShot(swooshSound, soundVolume);
-            Debug.Log("Playing teleport swoosh through AudioSource.");
+            Debug.Log("Playing teleport swoosh.");
         }
         else
         {
